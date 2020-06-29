@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".QuestionsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/quiz_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="What country does this flag belong to?"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/quiz_image"
+            android:layout_width="281dp"
+            android:layout_height="172dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_flag_of_germany" />
+
+        <LinearLayout
+            android:id="@+id/quiz_answers_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp">
+
+            <ProgressBar
+                android:id="@+id/quiz_progressbar"
+                style="?android:progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="10"
+                android:minHeight="50dp"
+                android:progress="0"
+                android:indeterminate="false"/>
+
+            <TextView
+                android:id="@+id/quiz_progressbar_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/10"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:padding="15dp"
+                android:textColor="@android:color/darker_gray">
+            </TextView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/quiz_first_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:text="@string/placeholder">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/quiz_second_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:text="@string/placeholder">
+        </TextView>
+
+        <TextView
+            android:id="@+id/quiz_third_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:text="@string/placeholder">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:text="@string/placeholder">
+        </TextView>
+    </LinearLayout>
+
+</ScrollView>
