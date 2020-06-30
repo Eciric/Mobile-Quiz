@@ -24,6 +24,12 @@
         android:name="com.example.quiz.FinishFragment"
         android:label="fragment_finish"
         tools:layout="@layout/fragment_finish" >
+        <argument
+            android:name="login"
+            android:defaultValue="None"/>
+        <argument
+            android:name="score"
+            android:defaultValue="None"/>
         <action
             android:id="@+id/action_finishFragment_to_loginFragment"
             app:destination="@id/loginFragment"
