@@ -1,4 +1,4 @@
 # Mobile-Quiz
 Quiz made in Android Studio using Kotlin.
 
-Still in progress.
+Basic functionality completed, possible visual updates and database integration for question model.
