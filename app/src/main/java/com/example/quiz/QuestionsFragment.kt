@@ -1,5 +1,6 @@
 package com.example.quiz
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_questions.*
@@ -15,9 +17,12 @@ import kotlinx.android.synthetic.main.fragment_questions.*
 class QuestionsFragment : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
+    lateinit var question: Question
     lateinit var login: String
-    lateinit var score: String
-    val position: Int = 1
+    var score: Int = 0
+    lateinit var scoreString: String
+    var position: Int = 1
+    lateinit var questionsList: ArrayList<Question>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,37 +45,54 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         quiz_second_answer_button.setOnClickListener(this)
         quiz_third_answer_button.setOnClickListener(this)
         quiz_fourth_answer_button.setOnClickListener(this)
-        val questionsList = Constants.getConstants()
-        val question: Question = questionsList[position-1]
-        quiz_progressbar_progress.text = "$position" + "/" + "10"
 
-        quiz_question.text = question.question
-        quiz_image.setImageResource(question.image)
-        quiz_first_answer_button.text = question.optionOne
-        quiz_second_answer_button.text = question.optionTwo
-        quiz_third_answer_button.text = question.optionThree
-        quiz_fourth_answer_button.text = question.optionFour
+        questionsList = Constants.getConstants()
+        updateQuestion()
     }
 
     override fun onClick(v: View?) {
         when(v!!.id) {
-
             R.id.quiz_first_answer_button -> {
-                Toast.makeText(activity, "1 Pressed", Toast.LENGTH_SHORT).show()
-
+                validateAnswer(1)
             }
             R.id.quiz_second_answer_button -> {
-                Toast.makeText(activity, "2 Pressed", Toast.LENGTH_SHORT).show()
-
+                validateAnswer(2)
             }
             R.id.quiz_third_answer_button -> {
-                Toast.makeText(activity, "3 Pressed", Toast.LENGTH_SHORT).show()
-
+                validateAnswer(3)
             }
             R.id.quiz_fourth_answer_button -> {
-                Toast.makeText(activity, "4 Pressed", Toast.LENGTH_SHORT).show()
-
+                validateAnswer(4)
             }
         }
+    }
+
+    private fun updateQuestion() {
+        if (position > 4) {
+            scoreString = score.toString()
+            val bundle = bundleOf("login" to login, "score" to scoreString)
+            navController.navigate(R.id.action_questionsFragment_to_endingFragment, bundle)
+        } else {
+            question = questionsList[position-1]
+
+            quiz_progressbar_progress.text = "$position" + "/" + "10"
+            quiz_question.text = question.question
+            quiz_image.setImageResource(question.image)
+            quiz_first_answer_button.text = question.optionOne
+            quiz_second_answer_button.text = question.optionTwo
+            quiz_third_answer_button.text = question.optionThree
+            quiz_fourth_answer_button.text = question.optionFour
+        }
+    }
+
+    private fun validateAnswer(answer: Int) {
+        if (question.correctAnswer == answer) {
+            Toast.makeText(activity, "Correct answer", Toast.LENGTH_SHORT).show()
+            score+=1
+        } else {
+            Toast.makeText(activity, "Wrong answer", Toast.LENGTH_SHORT).show()
+        }
+        position+=1
+        updateQuestion()
     }
 }
